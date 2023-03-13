@@ -45,6 +45,7 @@
                             <td>{{ $product->created_at }}</td>
                             <td>{{ $product->updated_at }}</td>
                             <td>
+                            <a class="btn btn-sm btn-info" href="{{route('products.edit',$product->id)}}">Edit</a>
                             <form action="{{ route('products.destroy',$product->id) }}" method="Post">
                                 @csrf
                                 @method('DELETE')

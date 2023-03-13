@@ -25,7 +25,7 @@ class ProductController extends Controller
 public function destroy($id){
     /// delete product where id 
     Product::where('id', $id)->delete();
-    return redirect()->route('products.index')->with('success', 'Product deleted successfully');
+    return redirect()->route('products')->with('success', 'Product deleted successfully');
 }
 
 public function store(Request $request){
@@ -38,6 +38,16 @@ public function store(Request $request){
     ]);
     /// create new product 
     Product::create($request->all());
+    return redirect()->route('products');
+}
+public function edit($id){
+    /// find product by id 
+    $product = Product::find($id);
+    return view('products.edit', compact('product'));
+}
+public function update(Request $request, Product $product){
+  
+    $product->fill($request->post())->save();
     return redirect()->route('products');
 }
 }
